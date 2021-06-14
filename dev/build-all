@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+for x in base go node python devops aws gcp; do
+  echo
+  echo "*** Building yey-$x ***"
+  echo
+  docker build yey-$x -t silphid/yey-$x
+done

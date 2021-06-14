@@ -1,0 +1,8 @@
+prompt_context() {
+  trap '' SIGINT
+  p10k segment -f blue -b black -i '⭐️' -t "$YEY_CONTEXT"
+}
+
+POWERLEVEL9K_CONTEXT="prompt_context"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs newline status)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()

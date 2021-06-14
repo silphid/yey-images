@@ -1,0 +1,2 @@
+. <(cat-dir ~/.rc/after)
+. ~/.onceafterrc

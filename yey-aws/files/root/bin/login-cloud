@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+[[ -f ~/.aws/credentials ]] && exit
+aws configure

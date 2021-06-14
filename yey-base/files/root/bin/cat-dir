@@ -1,0 +1,15 @@
+#!/bin/bash
+# cat all files in given dir
+if [[ $# -ne 1 ]]; then
+  echo
+  echo "Syntax:"
+  echo
+  echo "  cat-dir PATH"
+  echo
+  exit
+fi
+
+for file in $(find $1 -maxdepth 1 -type f -print); do
+  cat $file
+  echo
+done
