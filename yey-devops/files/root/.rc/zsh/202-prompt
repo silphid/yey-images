@@ -12,8 +12,7 @@ if kubectl config current-context 1>/dev/null 2>&1; then
       p10k segment -f yellow -b black -i '📦' -t "$ns"
     fi
   }
-  POWERLEVEL9K_CLUSTER="prompt_cluster"
-  POWERLEVEL9K_KUBE_NS="prompt_kube_ns"
+
   POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context cluster kube_ns dir vcs newline status)
   POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 fi

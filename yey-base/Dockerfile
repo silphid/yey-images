@@ -12,12 +12,6 @@ RUN apt-get update && \
       manpages manpages-posix netcat unzip uuid-runtime vim wget
 
 #
-# UTF-8 locale
-#
-RUN apt-get install -y locales && \
-    locale-gen "en_US.UTF-8"
-
-#
 # zsh
 #
 # zsh is a shell designed for interactive use, although it is also a powerful scripting language.

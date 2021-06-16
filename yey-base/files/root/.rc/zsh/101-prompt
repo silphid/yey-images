@@ -2,7 +2,10 @@ prompt_context() {
   trap '' SIGINT
   p10k segment -f blue -b black -i '⭐️' -t "$YEY_CONTEXT"
 }
+prompt_time() {
+  trap '' SIGINT
+  p10k segment -f blue -b black -i '🕓' -t "$(date +%X)"
+}
 
-POWERLEVEL9K_CONTEXT="prompt_context"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs newline status)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time)
