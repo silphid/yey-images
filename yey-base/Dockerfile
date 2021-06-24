@@ -77,4 +77,4 @@ RUN curl -o /usr/local/bin/tldr https://raw.githubusercontent.com/raylee/tldr/ma
 # finalize
 COPY files/ /
 ENV PATH="/root/bin:$PATH"
-ENTRYPOINT ["zsh"]
+CMD ["zsh"]
