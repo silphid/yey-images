@@ -1,3 +1,0 @@
-if [[ ! -f ~/.once_done ]]; then
-  . <(cat-dir ~/.rc/once/before)
-fi

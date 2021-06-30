@@ -1,4 +1,0 @@
-if [[ ! -f ~/.once_done ]]; then
-  . <(cat-dir ~/.rc/once/after)
-  touch ~/.once_done
-fi

@@ -1,5 +1,3 @@
-. ~/.beforerc
-
+. <(cat-dir ~/.rc/before)
 . <(cat-dir ~/.rc/bash)
-
-. ~/.afterrc
+. <(cat-dir ~/.rc/after)

@@ -1,2 +1,0 @@
-. ~/.oncebeforerc
-. <(cat-dir ~/.rc/before)

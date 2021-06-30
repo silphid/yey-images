@@ -1,4 +1,4 @@
-. ~/.beforerc
+. <(cat-dir ~/.rc/before)
 
 export ZSH=~/.oh-my-zsh
 export ZSH_CUSTOM=$ZSH/custom
@@ -15,5 +15,4 @@ autoload -U compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
 . <(cat-dir ~/.rc/zsh)
-
-. ~/.afterrc
+. <(cat-dir ~/.rc/after)
