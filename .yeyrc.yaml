@@ -1,0 +1,99 @@
+# Sets URL of parent `.yeyrc.yaml` file to use as base.
+#
+# parent: PARENT_YEYRC_URL
+
+# Sets docker image to run.
+# Note: here the base context does not set any image, it lets child variations define that.
+#
+# image: alpine
+
+# Sets Dockerfile to build image from before running it.
+# Note: exclusive of `image` property.
+#
+# build: Dockerfile
+
+# Sets `docker run --volume` flags (supports "~/" prefix for local $HOME dir and interpolation of $ENV_VARs)
+mounts:
+  ~/: /home
+  ~/.ssh: /root/.ssh
+  ~/.gitconfig: /root/.gitconfig
+  ~/.config/gcloud/: /root/.config/gcloud
+  ~/.config/gh: /root/.config/gh
+
+# Sets `docker run --env` flags (supports interpolation of $ENV_VARs)
+env:
+  # Those environment variables apply to all child contexts (unless overriden).
+  GCP_ZONE: northamerica-northeast1-a
+  TZ: $TZ
+  LS_COLORS: $LS_COLORS
+  TERM: $TERM
+  TERM_COLOR: $TERM_COLOR
+  TERM_PROGRAM: $TERM_PROGRAM
+
+# Sets `docker exec --entrypoint` flag (required to start multiple sessions with same container)
+# Note: typically replicates the ENTRYPOINT instruction in Dockerfile
+entrypoint: zsh
+
+# Sets list of command and arguments to pass to docker.
+# Note: exclusive of `entrypoint` property.
+#
+# cmd:
+#   - zsh
+
+# Sets `docker run --network` flag (defaults to "host").
+# It connects container to given network. Using the `host` network is especially useful, as it seamlessly
+# connects your container to your local machine's network.
+network: host
+
+# Sets `docker run --rm` flag (defaults to "true")
+remove: true
+
+# Configuration variations for overriding base values.
+# This allows to create multiple variations among which the user will be prompted to choose.
+# Think of each variation as a dimension along which configurations can vary.
+# All variations defined at this level have to be fulfilled and will be prompted to user. However, you can
+# also nest variations within a parent context, which will only be prompted to user if he selects the parent
+# context.
+variations:
+  # The `profile` variation allows to prompt the user whether they want to do dev or devops tasks.
+  # If user selects `dev`, they will then be prompted for that context's child variations (ie: `language`).
+  # If user selects `devops`, they will then be prompted for `environment` variation.
+  # Note that the names "profile", "dev" and "devops" are arbitrary user-defined identifiers.
+  profile:
+    dev:
+      env:
+        PROFILE: Developer
+      variations:
+        language:
+          go:
+            image: silphid/yey-go
+          node:
+            image: silphid/yey-node
+          python:
+            image: silphid/yey-python
+
+    devops:
+      env:
+        PROFILE: DevOps
+      # The `devops` context contains 2 variations at the same level, meaning that
+      # when user selects this context, they will then always be prompted for
+      # those 2 variations.
+      variations:
+        cloud:
+          gcp:
+            image: silphid/yey-gcp
+            env:
+              GCP_PROJECT: my-gcp-project
+          aws:
+            image: silphid/yey-aws
+
+        environment:
+          qa:
+            env:
+              KUBE_CONTEXT: qa-cluster
+          stg:
+            env:
+              KUBE_CONTEXT: stg-cluster
+          prod:
+            env:
+              KUBE_CONTEXT: prod-cluster
